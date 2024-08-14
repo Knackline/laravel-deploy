@@ -53,7 +53,7 @@ The script and configuration file will be generated based on your input.
 Once the script is generated, you can deploy your application by running:
 
 ```bash
-bash deploy.sh
+php artisan deploy
 ```
 
 This script will:
