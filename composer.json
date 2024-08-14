@@ -1,0 +1,27 @@
+{
+  "name": "knackline/laravel-deploy",
+  "description": "A Laravel package for deploying Laravel projects using a shell script.",
+  "type": "library",
+  "license": "MIT",
+  "autoload": {
+    "psr-4": {
+      "Knackline\\LaravelDeploy\\": "src/"
+    }
+  },
+  "authors": [
+    {
+      "name": "RAJKUMAR SAMRA",
+      "email": "rajkumarsamra@gmail.com"
+    }
+  ],
+  "require": {
+    "laravel/framework": "^8.0|^9.0|^10.0|^11.0"
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Knackline\\LaravelDeploy\\DeployServiceProvider"
+      ]
+    }
+  }
+}
