@@ -1,8 +1,9 @@
+
 # Laravel Deploy Package
 
-![Laravel](https://img.shields.io/badge/Laravel-8.x-orange)
-![PHP](https://img.shields.io/badge/PHP-7.4%2B-blue)
-![License](https://img.shields.io/badge/license-MIT-brightgreen)
+![Laravel](https://img.shields.io/badge/Laravel-8.x-orange+?logo=laravel)
+![PHP](https://img.shields.io/badge/PHP-7.4%2B-blue+?logo=php)
+![License](https://img.shields.io/badge/license-MIT-brightgreen+?logo=MIT)
 
 ## Overview
 
@@ -52,7 +53,7 @@ The script and configuration file will be generated based on your input.
 Once the script is generated, you can deploy your application by running:
 
 ```bash
-php artisan deploy
+bash deploy.sh
 ```
 
 This script will:
@@ -80,8 +81,8 @@ You can manually adjust these settings as needed.
 
 ## Credits
 
-- **Knackline**
-- **Rajkumar Samra**
+  **RAJKUMAR** - [rajkumarsamra@gmail.com](mailto:rajkumarsamra@gmail.com) ([Github](https://github.com/rjsamra))
+
 
 ## License
 
