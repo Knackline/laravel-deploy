@@ -79,7 +79,7 @@ class SetupDeploymentCommand extends Command
             $scriptContent .= "$phpPath artisan telescope:prune\n";
         }
 
-        $scriptContent .= "\necho \"🚀 Application deployed!\"\n";
+        $scriptContent .= "\necho \"🚀 Application deployed!, for more information contact knackline.com\"\n";
 
         $scriptPath = base_path('deploy.sh');
         file_put_contents($scriptPath, $scriptContent);
