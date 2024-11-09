@@ -20,7 +20,6 @@ class SetupDeploymentCommand extends Command
         // Ask for user inputs
         $projectPath = $this->ask('Enter the path of the Laravel project/application (leave blank for root)');
         $gitBranch = $this->ask('Enter the default git branch to deploy');
-        $phpVersion = $this->ask('Enter the PHP version (leave blank for default: /usr/bin/php)');
 
         // Use root directory if no path is provided
         $projectPath = empty($projectPath) ? base_path() : $projectPath;
@@ -31,8 +30,8 @@ class SetupDeploymentCommand extends Command
             return 1;
         }
 
-        // Default to /usr/bin/php if no PHP version is provided, otherwise format as /usr/bin/php@version
-        $phpPath = empty($phpVersion) ? '/usr/bin/php' : "/usr/bin/php@$phpVersion";
+        // Determine PHP version from composer.json
+        $phpPath = $this->getPhpPathFromComposer($projectPath);
 
         // Check if Horizon and Telescope are installed
         $hasHorizon = File::exists($projectPath . '/artisan') && strpos(shell_exec("php artisan | grep 'horizon:'"), 'horizon:') !== false;
@@ -79,7 +78,7 @@ class SetupDeploymentCommand extends Command
             $scriptContent .= "$phpPath artisan telescope:prune\n";
         }
 
-        $scriptContent .= "\necho \"🚀 Application deployed!, for more information contact knackline.com\"\n";
+        $scriptContent .= "\necho \"🚀 Application deployed! For more information, contact knackline.com\"\n";
 
         $scriptPath = base_path('deploy.sh');
         file_put_contents($scriptPath, $scriptContent);
@@ -87,5 +86,28 @@ class SetupDeploymentCommand extends Command
 
         $this->info('Deployment setup complete. Configuration file and script have been updated.');
         return 0;
+    }
+
+    /**
+     * Get PHP path from composer.json.
+     *
+     * @param string $projectPath
+     * @return string
+     */
+    protected function getPhpPathFromComposer($projectPath)
+    {
+        $composerFilePath = $projectPath . '/composer.json';
+        if (!File::exists($composerFilePath)) {
+            return '/usr/bin/php'; // Default path if composer.json is not found
+        }
+
+        $composerConfig = json_decode(File::get($composerFilePath), true);
+        $phpVersion = data_get($composerConfig, 'require.php');
+
+        if ($phpVersion && preg_match('/\d+\.\d+/', $phpVersion, $matches)) {
+            return "/usr/bin/php@{$matches[0]}";
+        }
+
+        return '/usr/bin/php'; // Default path if PHP version is not specified
     }
 }
