@@ -73,7 +73,6 @@ return [
     'script_path' => base_path('deploy.sh'),  // Path to the generated deployment script
     'project_path' => '/path/to/your/project',  // Path to your Laravel project
     'git_branch' => 'main',  // Default Git branch to deploy
-    'php_path' => '/usr/bin/php@8.2',  // PHP executable path
 ];
 ```
 
